@@ -779,11 +779,11 @@ th:first-child {
 	float: left;
 }
 
-.full-width-content .content, .tribe-filters-closed #tribe-events-content {
+.full-width-content .content-sidebar-wrap .content, .tribe-filters-closed .tribe-events-pg-template #tribe-events-content {
 	float: none;
 	margin-left: auto;
 	margin-right: auto;
-	width: 900px!important;
+	width: 900px;
 }
 
 /* Sidebar */
@@ -2381,6 +2381,7 @@ overflow:hidden;}
 }
 .tribe-mini-calendar-event .list-info {font-size:16px!important;}
 .end-events {height:8rem;}
+
 span.event-categories {font-weight:700;}
 
 /* Media Queries
@@ -2418,11 +2419,11 @@ span.event-categories {font-weight:700;}
 	}
 
 	.content,
-	.full-width-content .content,
+	.full-width-content .content, .full-width-content .content-sidebar-wrap .content, 
 	.genesis-responsive-menu .genesis-nav-menu .sub-menu a,
 	.genesis-responsive-menu .genesis-nav-menu .sub-menu,
 	.js .nav-primary,
-	.sidebar, .entry-title {
+	.sidebar, .entry-title, .tribe-filters-closed .tribe-events-pg-template #tribe-events-content {
 		width: 100%;
 	}
 

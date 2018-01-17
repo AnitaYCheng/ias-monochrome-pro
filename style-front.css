@@ -87,7 +87,7 @@ p .line {
 }
 
 .full-width-content.front-page .content  {
-	width: 100%;
+	width: 100%!important;
 }
 
 /*.front-page .wrap {
