@@ -779,11 +779,11 @@ th:first-child {
 	float: left;
 }
 
-.full-width-content .content {
+.full-width-content .content, .tribe-filters-closed #tribe-events-content {
 	float: none;
 	margin-left: auto;
 	margin-right: auto;
-	width: 900px;
+	width: 900px!important;
 }
 
 /* Sidebar */
@@ -2379,6 +2379,8 @@ overflow:hidden;}
 	border-top:none!important;
 	padding-top:0!important;
 }
+.tribe-mini-calendar-event .list-info {font-size:16px!important;}
+.end-events {height:8rem;}
 span.event-categories {font-weight:700;}
 
 /* Media Queries
