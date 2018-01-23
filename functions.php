@@ -488,7 +488,11 @@ function remove_date_from_bar( $filters ) {
 */
 
 function my_date($input_date) {
-     return date("F j, Y", strtotime($input_date));         
+     return date("l, F j, Y", strtotime($input_date));         
+}
+
+function my_time($input_time) {
+	return date("g:i A", strtotime($input_time));
 }
 
 // Remove link in TEC event categories
