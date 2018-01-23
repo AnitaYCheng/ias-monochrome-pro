@@ -650,7 +650,7 @@ input[type="search"]::-webkit-search-results-button {
 /* Tables
 --------------------------------------------- */
 
-.tablepress tfoot th, .tablepress thead th, .tablepress tbody td, .tablepress tfoot th {white-space: :nowrap;}
+.tablepress tfoot th, .tablepress thead th, .tablepress tbody td, .tablepress tfoot th {white-space: nowrap;}
 
 
 
@@ -1957,15 +1957,16 @@ body.archive p.entry-meta {
 	font-size: 12px;
 	font-size: 1.2rem;
 	letter-spacing: 1px;
+	text-decoration: none;
 	line-height: 1;
 	padding: 10px 15px;
-	text-transform: uppercase;
+	text-transform: none;
 }
 
 .pods-pagination-advanced a:hover, .archive-pagination a:hover,
 .pods-pagination-advanced a:focus, .archive-pagination a:focus,
 .pods-pagination-current, .archive-pagination li.active a {
-	background-color: #0066cc;
+	background-color: #187e36;
 	box-shadow: 0 1px 15px 0 rgba(0,0,0,0.2);
 	-webkit-transform: translateY(-1px);
 	-moz-transform: translateY(-1px);
