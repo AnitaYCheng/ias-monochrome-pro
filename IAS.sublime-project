@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "/Applications/MAMP/htdocs/wp-content/themes/monochrome-pro"
+		},
+		{
+			"path": "/Applications/MAMP/htdocs/wp-content/themes/genesis"
 		}
 	]
 }

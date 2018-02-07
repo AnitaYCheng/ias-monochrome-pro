@@ -649,8 +649,10 @@ input[type="search"]::-webkit-search-results-button {
 
 /* Tables
 --------------------------------------------- */
-
-.tablepress tfoot th, .tablepress thead th, .tablepress tbody td, .tablepress tfoot th {white-space: nowrap;}
+.tablepress {table-layout:fixed;}
+.tablepress tfoot th, .tablepress thead th, .tablepress tbody td:first-child, .tablepress tfoot th {white-space: nowrap;}
+.tablepress tbody td:first-child a, .tablepress tbody td:first-child span {white-space:normal;}
+.tablepress tbody td {word-break:keep-all;word-wrap:normal;}
 
 
 
@@ -805,6 +807,9 @@ th:first-child {
 .sidebar-content .sidebar {
 	float: left;
 }
+
+aside.sidebar {font-size:70%;}
+aside.sidebar img {max-width:250px!important;width:auto!important;max-height:200px!important;}
 
 /* Column Classes
 --------------------------------------------- */
@@ -1084,6 +1089,7 @@ body.archive h2.entry-title {
 .sidebar .widget-title {
 	margin-bottom: 20px;
 }
+
 
 /* WordPress
 --------------------------------------------- */
@@ -1457,7 +1463,7 @@ img.alignright,
 .genesis-nav-menu .menu-item,
 .genesis-nav-menu .toggle-header-search {
 	display: inline-block;
-	text-align: right;
+	text-align: left;
 }
 
 .genesis-nav-menu .menu-item:focus,
@@ -1941,16 +1947,17 @@ body.archive p.entry-meta {
 /* Pagination
 --------------------------------------------- */
 .pods-pagination-advanced {
-	display:inline-block;
+	display:block;
 	margin-top:2em;
 }
 
 .pods-pagination-advanced, .pagination {
 	clear: both;
+	text-align:center;
 }
 
 .pods-pagination-advanced a,.pods-pagination-current, .archive-pagination a {
-	background-color: #4C4C4D;
+	background-color: #22af4b;
 	border-radius: 3px;
 	color: #fff;
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -2437,6 +2444,9 @@ span.event-categories {font-weight:700;}
 		width: 100%;
 	}
 
+
+aside.sidebar {displa}
+
 	.entry-title {
 		margin-left:0;
 	}
@@ -2718,7 +2728,7 @@ span.event-categories {font-weight:700;}
 	.three-sixths,
 	.two-fourths,
 	.two-sixths,
-	.two-thirds {
+	.two-thirds, body.archive h2.entry-title {
 		margin: 0;
 		width: 100%;
 	}
@@ -2745,3 +2755,6 @@ span.event-categories {font-weight:700;}
 	}
 
 }
+
+/* No-JS styling */
+.no-js .wpsm_panel-group .collapse {display:block;}

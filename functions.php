@@ -55,6 +55,7 @@ function monochrome_enqueue_scripts_styles() {
 	wp_enqueue_style( 'monochrome-ionicons', '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', array(), CHILD_THEME_VERSION );
 
 	wp_enqueue_script( 'monochrome-global-script', get_stylesheet_directory_uri() . '/js/global.js', array( 'jquery' ), '1.0.0', true );
+	wp_enqueue_script( 'no-js-script', get_stylesheet_directory_uri() . '/js/no-js.js', array( 'jquery' ), '1.0.0', true );
 
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 	wp_enqueue_script( 'monochrome-responsive-menu', get_stylesheet_directory_uri() . '/js/responsive-menus' . $suffix . '.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
@@ -143,12 +144,12 @@ remove_filter( 'genesis_nav_items', 'genesis_nav_right', 10, 2 );
 remove_filter( 'wp_nav_menu_items', 'genesis_nav_right', 10, 2 );
 
 // Remove navigation meta box.
-add_action( 'genesis_theme_settings_metaboxes', 'monochrome_remove_genesis_metaboxes' );
-function monochrome_remove_genesis_metaboxes( $_genesis_theme_settings_pagehook ) {
+// add_action( 'genesis_theme_settings_metaboxes', 'monochrome_remove_genesis_metaboxes' );
+// function monochrome_remove_genesis_metaboxes( $_genesis_theme_settings_pagehook ) {
 
-	remove_meta_box( 'genesis-theme-settings-nav', $_genesis_theme_settings_pagehook, 'main' );
+// 	remove_meta_box( 'genesis-theme-settings-nav', $_genesis_theme_settings_pagehook, 'main' );
 
-}
+// }
 
 // Register navigation menus.
 add_theme_support( 'genesis-menus', array( 'primary' => __( 'Header Menu', 'monochrome-pro' ) ) );
@@ -415,69 +416,63 @@ Copy the following functions into any new functions.php if you change the theme!
 *****************
 *****************
 
-/**
-* The Events Calendar - Bypass Genesis genesis_do_post_content in Event Views
- * This snippet overrides the Genesis Content Archive settings for Event Views
- * Event Template set to: Admin > Events > Settings > Display Tab > Events template > Default Page Template
- * The Events Calendar @4.0.4
- * Genesis @2.2.6
-*/
-add_action( 'get_header', 'tribe_genesis_bypass_genesis_do_post_content' );
-function tribe_genesis_bypass_genesis_do_post_content() {
- 
-    if ( class_exists( 'Tribe__Events__Main' ) && class_exists( 'Tribe__Events__Pro__Main' ) ) {
-        if ( tribe_is_month() || tribe_is_upcoming() || tribe_is_past() || tribe_is_day() || tribe_is_map() || tribe_is_photo() || tribe_is_week() || ( tribe_is_recurring_event() && ! is_singular( 'tribe_events' ) ) ) {
-            remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
-            remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
-            add_action( 'genesis_entry_content', 'the_content', 15 );
-        }
-    } elseif ( class_exists( 'Tribe__Events__Main' ) && ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
-        if ( tribe_is_month() || tribe_is_upcoming() || tribe_is_past() || tribe_is_day() ) {
-            remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
-            remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
-            add_action( 'genesis_entry_content', 'the_content', 15 );
-        }
-    }
- 
-}
+/* Adds 'no-js' class to HTML to help detect Javascript */
+remove_action( 'genesis_doctype', 'genesis_do_doctype' );
+add_action( 'genesis_doctype', 'genesis_do_js_doctype' );
 
 /**
- * Sets the default date for Tribe Event Calendar
+ * Echo the doctype and opening markup.
  *
- * Expects to be called during tribe_events_pre_get_posts. Note that this
- * function modifies $_REQUEST - this is needed for consistency because
- * various parts of TEC inspect that array directly to determine the current
- * date.
- * 
- * @param WP_Query $query
+ * If you are going to replace the doctype with a custom one, you must remember to include the opening <html> and
+ * <head> elements too, along with the proper attributes.
+ *
+ * It would be beneficial to also include the <meta> tag for content type.
+ *
+ * The default doctype is XHTML v1.0 Transitional, unless HTML support os present in the child theme.
+ *
+ * @since 1.3.0
  */
-function tribe_force_event_date( WP_Query $query ) {
-    // Don't touch single posts or queries other than the main query
-    if ( ! $query->is_main_query() || is_single() ) {
-        return;
-    }
-    // If a date has already been set by some other means, bail out
-    if ( strlen( $query->get( 'eventDate' ) ) || ! empty( $_REQUEST['tribe-bar-date'] ) ) {
-        return;
-    }
-    // Change this to whatever date you prefer
-    $default_date = '2018-03-21';
-    // Use the preferred default date
-    $query->set( 'eventDate', $default_date );
-    $query->set( 'start_date', $default_date );
-    // $_REQUEST['tribe-bar-date'] = $default_date;
-}
-add_action( 'tribe_events_pre_get_posts', 'tribe_force_event_date' ); 
+function genesis_do_js_doctype() {
 
-add_filter( 'tribe-events-bar-filters',  'remove_date_from_bar', 1000, 1 );
- 
-function remove_date_from_bar( $filters ) {
-  if ( isset( $filters['tribe-bar-date-filter'] ) ) {
-        unset( $filters['tribe-bar-date-filter'] );
-    }
- 
-    return $filters;
+	if ( genesis_html5() ) {
+		genesis_html5_js_doctype();
+	} else {
+		genesis_xhtml_js_doctype();
+	}
+
 }
+
+/**
+ * XHTML 1.0 Transitional doctype markup.
+ *
+ * @since 2.0.0
+ */
+function genesis_xhtml_js_doctype() {
+
+	?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?> class="no-js">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+<?php
+
+}
+
+/**
+ * HTML5 doctype markup.
+ *
+ * @since 2.0.0
+ */
+function genesis_html5_js_doctype() {
+
+	?><!DOCTYPE html>
+<html <?php language_attributes( 'html' ); ?> class="no-js">
+<head <?php echo genesis_attr( 'head' ); ?>>
+<meta charset="<?php bloginfo( 'charset' ); ?>" />
+<?php
+
+}
+
+
 
 
 /* Output filter for my_date in Pods posts
@@ -493,6 +488,10 @@ function my_date($input_date) {
 
 function my_time($input_time) {
 	return date("g:i A", strtotime($input_time));
+}
+
+function my_year($input_time) {
+	return date("Y", strtotime($input_time));
 }
 
 // Remove link in TEC event categories

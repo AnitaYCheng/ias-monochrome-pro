@@ -21,6 +21,8 @@
 	line-height:1.4;
 	font-size:1.4em;
 }
+
+
 /*.front-page h2:after, .front-page h2.circle:before, .gca-column.one-fourth .line.up:after {
 	content:"";
 	display:block;
@@ -805,7 +807,7 @@ p .line {
 	.front-page .wrap {
 		max-width: 100%;
 	}
-
+.front-page h2 strong {font-size:1.5em;}
 
 .flexible-widgets .featuredpost article a.alignnone {display:inline;}
 
