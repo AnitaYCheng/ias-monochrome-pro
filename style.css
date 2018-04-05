@@ -282,7 +282,7 @@ mark {
 }
 
 blockquote {
-	margin: 40px 40px 10px 40px;
+	margin: 40px;
 }
 
 blockquote::before {
@@ -305,12 +305,12 @@ h4,
 h5,
 h6 {
 	font-family: 'Arial', Helvetica, Arial, sans-serif;
-	font-weight: 500;
+	font-weight: 700;
 	line-height: 1.2;
 	margin: 0 0 10px;
 }
 
-h1, h2 strong {
+h1, h2 strong, h3 strong {
 	font-family:'Anton', sans-serif;
 	font-weight:400;
 }
@@ -1130,7 +1130,10 @@ img.alignnone,
 	margin-bottom: 12px;
 }
 
-.gca-column img.alignnone {margin:0 10px 0 0;float:left;}
+.gca-column img.alignnone, img.talk-list-icon {margin:0 10px 0 0;float:left;}
+img.talk-list-icon {float:right;}
+
+h4.talk-list {display:inline;}
 
 a.alignleft,
 img.alignleft,
@@ -1209,6 +1212,11 @@ img.alignright,
 	text-align: center;
 }
 
+div.rotatingtweets {margin:2em auto;}
+
+div.widget_rotatingtweets_widget, div.rotatingtweet, div.widget_rotatingtweets_widget div.widget-title {
+    max-width: 600px;
+}
 
 /* Featured Content
 --------------------------------------------- */
@@ -1428,8 +1436,8 @@ img.alignright,
 	background-size: contain !important;
 	background-position: left center !important;
 	float: left;
-	min-height: 180px;
-	margin-top:-0.8em;
+	min-height: 150px;
+	margin-top:-0.9em;
 	width: 100%;
 }
 
@@ -2733,6 +2741,19 @@ aside.sidebar {displa}
 		width: 100%;
 	}
 
+}
+
+@media screen and (max-width: 800px) {
+	.cloud-city-dash, .cloud-city-tripdash {height:3em!important;}
+		.cloud-city-dash_title {font-size:0.7em!important;}
+	.cloud-city-digit {font-size:1em!important;}
+}
+
+
+@media screen and (max-width: 650px) {
+	.cloud-city-dash, .cloud-city-tripdash {height:2.5em!important;}
+		.cloud-city-dash_title {font-size:0.6em!important;}
+	.cloud-city-digit {font-size:0.9em!important;}
 }
 
 @media only screen and (max-width: 600px) {

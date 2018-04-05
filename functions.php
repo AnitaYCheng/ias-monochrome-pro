@@ -473,31 +473,3 @@ function genesis_html5_js_doctype() {
 }
 
 
-
-
-/* Output filter for my_date in Pods posts
-   Use this against a date field in your Pods Fields like so:
-   {@post_date,my_date}
-
-   The Function below should be in your functions.php
-*/
-
-function my_date($input_date) {
-     return date("l, F j, Y", strtotime($input_date));         
-}
-
-function my_time($input_time) {
-	return date("g:i A", strtotime($input_time));
-}
-
-function my_year($input_time) {
-	return date("Y", strtotime($input_time));
-}
-
-// Remove link in TEC event categories
-add_filter( 'tribe_get_event_categories', 'display_but_not_link_event_cats' );
-function display_but_not_link_event_cats( $html ) {
-	$new_html = preg_replace( '/<a href=\"(.*?)\">(.*?)<\/a>/', "\\2", $html ); // from http://www.stumiller.me/code-snippet-strip-links-from-string-in-php/
-
-	return $new_html;
-}
